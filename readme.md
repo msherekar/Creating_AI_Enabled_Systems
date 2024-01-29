@@ -1,4 +1,43 @@
-# Welcome to a Readme File
+Welcome to a Readme File as of 01/29/2024
+
+Motivation:
+This Repository is for my portfolio for the class Creating AI-Enabled Systems. It will have following system projects 1) Fraud Detection 2) Computer Vision 3) Time Series 4) NLP Recommendation 5) Reinforcement Learning.
+
+The code on this repo can be run via docker image at - https://hub.docker.com/repository/docker/msherekar/705.603spring24/general
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Second Welcome
 ### Third 
 

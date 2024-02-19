@@ -1,67 +1,9 @@
-Readme File as of 01/29/2024
+# Model Selection in 2 Parts
 
-Motivation:
-This Repository is for my portfolio for the class Creating AI-Enabled Systems. It will have following system projects 1) Fraud Detection 2) Computer Vision 3) Time Series 4) NLP Recommendation 5) Reinforcement Learning.
-
-The code on this repo can be run via docker image at - https://hub.docker.com/repository/docker/msherekar/705.603spring24/general
-
-As of 01/29/2024 repo has empty folders pertaining to the upcoming projects.
+* ***Part 1***: Explore the data set on speed dating and construct two models that provide some valued insight such as grouping or predictions. The models must come from different model areas such as listed as categories in the ModelTypes document. You must justify your answer considering the data and the prediction value.  
+* ***Part 2***: Explore a car data set and follow the suggestions in the python to build a model that predicts the amount of time that a car stays on the lot unsold.  This requires populating a python script and building a working docker image.
 
 
+# Assignment
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Second Welcome
-### Third 
-
-*italic*
-
-**bold**
-
-* list 1
-* list 2
-
-- list 1
-- list 2
-
-This decribes this particular project and directory level.
-
-
-[GitHub Readme1 Reference](https://github.com/tchapi/markdown-cheatsheet/blob/master/README.md)
-
-[General Readme2 Reference](https://www.mygreatlearning.com/blog/readme-file/#:~:text=When%20you%20create%20a%20repository,be%20easily%20converted%20to%20text)
-
-Bring in local graphic
-![GitHub Logo](./regan.png) 
-
-Bring in remote graphic
-![GitHub Logo](https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png) 
+## Submit the github link to the populated subdirectory, Model Selection, and the link to the docker image to Canvas.

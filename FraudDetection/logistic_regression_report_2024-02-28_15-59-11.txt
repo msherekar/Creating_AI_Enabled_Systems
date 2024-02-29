@@ -1,0 +1,5 @@
+Model: logistic_regression
+Model Metrics:
+Precision: 0.85
+Recall: 0.83
+F1 Score: 0.84

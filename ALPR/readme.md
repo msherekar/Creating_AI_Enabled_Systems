@@ -3,6 +3,7 @@
  
 
 **Problem Statement**: To create a basic object recognition model for license plates. 
+
 **Value Proposition**: Am automated system will improve traffic flow, reduce congestion, and eliminate the need for manual toll collection.
 
 # CONTENTS OF THIS REPOSITORY
@@ -33,12 +34,14 @@
 
 ## Miscellaneous Files
 - Various .csv files for testing
--original data file (transactions.csv)
+- original data file (transactions.csv)
 
-## [Docker Image]()
+## [Docker Image](docker pull msherekar/705.603spring24:ALPR)
 
 # INSTUCTIONS TO RUN
-- Download the container and execute this command on command line:
-- 
+- Download the container and execute these two commands on two separate command lines:
+- ffmpeg -i LicensePlateReaderSample_4K.mov -vcodec mpeg4 -f mpegts udp://127.0.0.1:23002
+- docker run -it -p 23002:23002/udp msherekar/705.603spring24:ALPR
+- Note the port to be used is 23002
 
 

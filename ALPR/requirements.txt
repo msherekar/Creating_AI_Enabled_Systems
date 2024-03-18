@@ -1,0 +1,8 @@
+numpy
+ffmpeg-python
+opencv-python-headless
+os
+json
+pytesseract
+IMAGE
+Pipeline

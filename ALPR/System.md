@@ -85,7 +85,7 @@ Mistakes can arise from stale data or incorrect data. Also, faulty pre-processin
 
 - **ETL Pipeline:** Develop an Extract, Transform, Load (ETL) pipeline to preprocess and clean the data, including steps such as data normalization, feature engineering, and outlier detection to improve model performance. 
 
-- ** Exploratory Data Analysis**: 
+- **Exploratory Data Analysis**: 
 1. Sizes/dimensions of bounding boxes: 
 2. Locations of these boxes relative to the image space
 
@@ -110,7 +110,7 @@ Mistakes can arise from stale data or incorrect data. Also, faulty pre-processin
 2. It is a perfect model for real time detection focussing on speed rather than accuracy
 3. Various versions of YOLO exist. For this project, yolov3 and yolov3-tiny were used.
 
- -** Deployment Strategy**
+ - **Deployment Strategy**
 
 The deployment strategy for the License Plate Detection system involves packaging the machine learning model into a Dockerized system architecture. 
 1. The system will run a main.py type of file. It will use various modules for realtime detection and print out results on the terminal as well as in a text file.

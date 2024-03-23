@@ -114,7 +114,7 @@ Mistakes can arise from stale data or incorrect data. Also, faulty pre-processin
 1. Based on this decision to prioritize Recall over Precision, Random Forest, Gradient Boosting Machines will be preferred models of choice. Also, ensemble models using Stacking Classifier (Linear Discriminant Analysis & Decision Tree) can also be used.
 2. Because of dependencies issues inside docker, I am submitting docker container with logistic regression model.
  
-- ** Deployment Strategy:**
+- **Deployment Strategy:**
 
 The deployment strategy for the fraud detection system involves packaging the machine learning model into a Dockerized system architecture. The system will utilize a class named Fraud_Detector_Model defined in the model.py module to construct and handle the model logic. The system will be capable of receiving input data via requests sent through Postman and GET, which should be in the format of a .csv file. Additionally, an ETL pipeline will be utilized to transform the input data into usable features. The final system will be packaged into a Docker image and published on DockerHub for ease of deployment.
 

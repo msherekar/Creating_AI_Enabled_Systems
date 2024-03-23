@@ -1,0 +1,5 @@
+Model: random_forest
+Model Metrics:
+Precision: 0.46
+Recall: 0.68
+F1 Score: 0.55

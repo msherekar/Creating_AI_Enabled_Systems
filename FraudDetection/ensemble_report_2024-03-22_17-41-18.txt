@@ -1,0 +1,5 @@
+Model: ensemble
+Model Metrics:
+Precision: 0.34
+Recall: 0.75
+F1 Score: 0.47

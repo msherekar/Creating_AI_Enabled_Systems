@@ -36,9 +36,11 @@
 - Various .csv files for testing
 - original data file (transactions.csv)
 
-## [Docker Image](docker pull msherekar/705.603spring24:ALPR)
+# Docker Image
 
-# INSTUCTIONS TO RUN
+## Command to pull docker image -  *docker pull msherekar/705.603spring24:ALPR*
+
+## INSTUCTIONS TO RUN
 - Download the container and execute these two commands on two separate command lines:
 - ffmpeg -i LicensePlateReaderSample_4K.mov -vcodec mpeg4 -f mpegts udp://127.0.0.1:23002
 - docker run -it -p 23002:23002/udp msherekar/705.603spring24:ALPR

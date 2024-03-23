@@ -103,7 +103,7 @@ Mistakes can arise from stale data or incorrect data. Also, faulty pre-processin
 - **Metrics and Advanced Metrics:**  
 1. Accuracy will be used to get an understanding of basic performance of the model i.e to check if indeed number plate was detected on a car, truck etc
 2. Jaccard Index will be used to measure the accuracy of bounding box or segmentation mask predictions compared to ground truth annotations.
-3
+
 
 - **Model Selection:** 
 1.One Stage Model YOLO (you look only once) will be used

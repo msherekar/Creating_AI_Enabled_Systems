@@ -1,1 +1,3 @@
-# sherekar-705.603Spring24
+# Class Portfolio
+## Creating AI Enabled Systems
+### sherekar-705.603Spring24

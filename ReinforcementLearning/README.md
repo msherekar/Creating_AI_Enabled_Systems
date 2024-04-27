@@ -1,11 +1,38 @@
-# Taxi environment
-A Q-learning implementation for OpenAIs Taxi-v3 environment. The notebook can be used as a tutorial for beginners in Reinforcement Learning.
+# EMAIL MARKETING SYSTEM
+## FIFTH CLASS PROJECT FOR CREATING AI ENABLED SYSTEMS (EN.705.603.81)
+ 
 
-The following sources were used in constructing this notebook:
+**Problem Statement**: To improve response rates to campaign marketing emails. 
+**Value Proposition**: Changing subject lines dynamically to obtain better response rates.
 
-[1] OpenAI Gym. Taxi-v3 environment. The OpenAI Gym environment is available under the MIT License.  <br> https://github.com/openai/gym/blob/master/gym/envs/toy_text/taxi.py
+# CONTENTS OF THIS REPOSITORY
 
-[2] LearnDataSci. Reinforcement Q-Learning from Scratch in Python with OpenAI Gym. Taxi-v2 implementation. <br> https://www.learndatasci.com/tutorials/reinforcement-q-learning-scratch-python-openai-gym/
+## Readme
 
-[3] Botforge. Save OpenAI Gym renders as GIFS. Public GitHub Gist. <br>
-https://gist.github.com/botforge/64cbb71780e6208172bbf03cd9293553
+## Systems Planning & Requirements
+
+## Jupyter Notebooks
+- ** Model Training**
+
+## Python Files
+- **preprocess.py** : For data engineering
+- **qagent.py**: For Q learning agent class 
+- **metrics.py**: For calculating various metrics
+- **reinforcement.py** : For model training
+- **deployment.py**: The systems level file that executes the whole code
+
+## Model Files
+- **q_table.pkl**
+
+## Miscellaneous Files
+- Docker File
+
+## [Docker Image](https://hub.docker.com/repository/docker/msherekar/705.603spring24/general)
+
+# INSTUCTIONS TO RUN
+- Download the container using this command on command line: docker pull msherekar/705.603spring24:ReinforcementLearning
+- Run this command to run the container: docker run -it -p 5000:5000 msherekar/705.603spring24:ReinforcementLearning
+- Use POST to send .csv files to the container. Make sure to have this address http://localhost:5000/suggest_subject_lines and name of key should be **new_state**
+
+
+

@@ -1,95 +1,99 @@
-# LIBRARIES
-import pandas as pd
-import numpy as np
-import pickle
-from itertools import product
+from preprocess import load_data, merge_data, calculate_rewards, preprocess_data
+from sar import generate_states, generate_actions, get_reward, calculate_reward
 from qagent import QLearningAgent
+from metrics import Metrics
+from train import train_agent
+from report import save_report
+import numpy as np
+import datetime
+import pickle
 
-# DATA
-userbase = pd.read_csv('userbase.csv')
-sent = pd.read_csv('sent_emails.csv')
-responded = pd.read_csv('responded.csv')
-responded = responded.drop_duplicates()
+# Load data
+userbase_file = 'userbase.csv'
+sent_file = 'sent_emails.csv'
+responded_file = 'responded.csv'
 
-# MERGE DATA
-# sent + userbase
-merged_data = pd.merge(sent, userbase, on='Customer_ID', how='left')
+# Setup dataframes
+userbase, sent, responded = load_data(userbase_file, sent_file, responded_file)
 
-# Fill in additional columns based on userbase information
-merged_data['Gender'] = merged_data['Gender'].fillna(userbase.set_index('Customer_ID')['Gender'])
-merged_data['Type'] = merged_data['Type'].fillna(userbase.set_index('Customer_ID')['Type'])
-merged_data['Email_Address'] = merged_data['Email_Address'].fillna(userbase.set_index('Customer_ID')['Email_Address'])
-merged_data['Age'] = merged_data['Age'].fillna(userbase.set_index('Customer_ID')['Age'])
-merged_data['Tenure'] = merged_data['Tenure'].fillna(userbase.set_index('Customer_ID')['Tenure'])
+# Merge data
+important_features = ['Gender', 'Type', 'Age', 'Tenure']
+merged_data = merge_data(sent, userbase, responded, important_features)
 
-# Drop rows with missing values
-merged_data = merged_data.dropna() # CHECK AGAIN LATER
-# add responded
-merged_data = pd.merge(merged_data, responded, on=['Customer_ID'], how='left') # meger on responded date as well.
-
-# REWARDS
-merged_data['Reward'] = np.where(merged_data['Sent_Date'] == merged_data['Responded_Date'], 1, 0)
-
-# Fix missing dates
-placeholder_date = pd.to_datetime('1900-01-01') # placeholder date
-merged_data['Responded_Date'].fillna(placeholder_date, inplace=True)
-
-# Renaming columns
-merged_data.rename(columns={'SubjectLine_ID_x': 'SubLine_Sent'}, inplace=True)
-merged_data.rename(columns={'SubjectLine_ID_y': 'SubLine_Responded'}, inplace=True)
-merged_data['SubLine_Responded'].fillna(-1, inplace=True)
+# Calculate rewards
+merged_data = calculate_rewards(merged_data)
 
 # STATES
-states=list(product(merged_data['Gender'].unique(), merged_data['Type'].unique(),merged_data['Age'].unique(), merged_data['Tenure'].unique()))
+states = generate_states(merged_data)
+
 # Initialize a dictionary to store rewards for each state
-state_rewards = {}
-
-# Iterate over each state
-for state in states:
-    # Calculate the hash value of the state tuple and get the corresponding index
-    state_index = hash(tuple(state)) % len(states)
-
-    # Retrieve the reward from the merged_data DataFrame based on the state index
-    reward = merged_data.loc[state_index, 'Reward']
-
-    # Store the reward in the state_rewards dictionary
-    state_rewards[state] = reward
+state_rewards = {state: get_reward(state, merged_data, states) for state in states}
 
 # ACTIONS
-actions = merged_data['SubLine_Sent'].unique()
+actions = generate_actions(merged_data)
 
-# TRAINING
-state_size = len(states)  # Assuming states is a list of states
-action_size = len(actions)  # Assuming actions is a list of unique actions
+# Parameters
+state_size = len(states)
+action_size = len(actions)
 
 # Initialize the Q-learning agent
 agent = QLearningAgent(state_size, action_size, learning_rate=0.1, discount_factor=0.9, epsilon=0.1)
 
-# Define your training loop
-num_episodes = 1000  # Number of training episodes
+# Training
+training_rewards, episodes_to_convergence = train_agent(agent, states, merged_data)
 
-for episode in range(num_episodes):
-    # Iterate over state-action pairs
-    for i in range(len(states) - 1):
-        # Get current state and action
-        state = states[i]
-        state_index = hash(tuple(state)) % len(states)
-        action = merged_data.loc[state_index, 'SubLine_Sent']
-        reward = merged_data.loc[state_index, 'Reward']
+# Calculate discounted rewards
+discounted_rewards = [reward * (0.9 ** i) for i, reward in enumerate(training_rewards)]
 
-        # Get next state
-        next_state = states[i + 1]
+# Metrics
+metrics = Metrics(training_rewards, discount_factor=0.9)
 
-        # Train the agent
-        agent.train(state, action, reward, next_state)
+# Save the trained Q-table
 
-# Get the learned Q-table
 Q_table = agent.get_q_table()
 
 # DOWNLOAD THE AGENT
 with open('q_table.pkl', 'wb') as f:
     pickle.dump(Q_table, f)
 
+# **************************** RESULTS ****************************
 
+# Print and plot the metrics
+print("Cumulative Rewards:", metrics.cumulative_rewards[-1])
+print("Average Reward:", metrics.average_reward)
+print("Discounted Reward:", metrics.discounted_rewards[0])
+metrics.plot_cumulative_rewards()
+metrics.plot_discounted_rewards()
+
+if episodes_to_convergence is not None:
+    print("Episodes to Convergence:", episodes_to_convergence)
+else:
+    print("Convergence not reached within the maximum number of episodes.")
+
+# Report
+# Define the report file name
+report_file = datetime.datetime.now().strftime("training_%Y-%m-%d_%H-%M-%S.txt")
+
+# Define the training metrics
+training_metrics = {
+    "Cumulative Rewards": metrics.cumulative_rewards[-1],
+    "Average Reward": metrics.average_reward,
+    "Discounted Reward":  metrics.discounted_rewards[0],
+    "Episodes to converge": episodes_to_convergence if episodes_to_convergence is not None else "Not converged within "
+                                                                                                "the maximum number "
+                                                                                                "of episodes"
+}
+# Define the details to be included in the report
+report_details = {
+
+    "Name of files": [userbase_file, sent_file, responded_file],
+    "Features used": important_features,
+    "Length of states": len(states),
+    "Learning Rate": 0.1,
+    "Discount factor": 0.9,
+    "Epsilon": 0.1
+}
+# Call the function to save the report
+save_report(report_file, report_details, training_metrics)
 
 

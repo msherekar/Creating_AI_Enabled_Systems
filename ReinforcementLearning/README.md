@@ -2,23 +2,27 @@
 ## FIFTH CLASS PROJECT FOR CREATING AI ENABLED SYSTEMS (EN.705.603.81)
  
 
-**Problem Statement**: To improve response rates to campaign marketing emails. 
+**Problem Statement**: To improve response rates to campaign marketing emails via reinforcement learning model. 
 **Value Proposition**: Changing subject lines dynamically to obtain better response rates.
 
 # CONTENTS OF THIS REPOSITORY
 
 ## Readme
 
-## Systems Planning & Requirements
+## Systems Planning & Requirements - Systems.md
 
 ## Jupyter Notebooks
-- ** Model Training**
+- **Exploratory Data Analysis** - eda.ipynb
+- **Model Training & Metrics** - model.ipynb
 
 ## Python Files
 - **preprocess.py** : For data engineering
 - **qagent.py**: For Q learning agent class 
 - **metrics.py**: For calculating various metrics
 - **reinforcement.py** : For model training
+- **report.py** : For text report generation
+- **sar.py** : For generating states, actions and rewards
+- **train.py** : For training the agent
 - **deployment.py**: The systems level file that executes the whole code
 
 ## Model Files
@@ -26,6 +30,9 @@
 
 ## Miscellaneous Files
 - Docker File
+- Requirements File
+- Metric Plots
+- Report
 
 ## [Docker Image](https://hub.docker.com/repository/docker/msherekar/705.603spring24/general)
 

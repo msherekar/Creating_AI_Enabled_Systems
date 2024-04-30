@@ -1,0 +1,14 @@
+Details:
+Name of files: userbase.csv, sent_emails.csv, responded.csv
+Features used: Gender, Type, Age, Tenure
+Length of states: 6992
+Learning Rate: 0.1
+Discount factor: 0.9
+Epsilon: 0.1
+
+Training Metrics:
+Cumulative Rewards: 128927
+Average Reward: 563.0
+Discounted Reward: 5629.999999812916
+Episodes to converge: 220
+

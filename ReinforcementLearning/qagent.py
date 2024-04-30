@@ -41,6 +41,11 @@ class QLearningAgent:
         td_error = td_target - self.Q_table[state_index, action_index]
         self.Q_table[state_index, action_index] += self.learning_rate * td_error
 
+    def get_action(self, state):
+        state_index = self.map_state_to_index(state)
+        return np.argmax(self.Q_table[state_index])
+
+
     def train(self, state, action, reward, next_state):
         self.update_q_table(state, action, reward, next_state)
 

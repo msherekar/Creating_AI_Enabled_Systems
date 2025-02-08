@@ -1,3 +1,3 @@
-# Class Portfolio
-## Creating AI Enabled Systems
-### sherekar-705.603Spring24
+# Creating AI Enabled Systems
+## Code bases for creating AI systems
+
